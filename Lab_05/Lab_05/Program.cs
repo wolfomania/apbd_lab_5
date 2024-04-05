@@ -1,4 +1,5 @@
 using Lab_05.Database;
+using Lab_05.EndPoints;
 using Lab_05.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,42 +22,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-    {
-        var forecast = Enumerable.Range(1, 5).Select(index =>
-                new WeatherForecast
-                (
-                    DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                    Random.Shared.Next(-20, 55),
-                    summaries[Random.Shared.Next(summaries.Length)]
-                ))
-            .ToArray();
-        return forecast;
-    })
-    .WithName("GetWeatherForecast")
-    .WithOpenApi();
-
-//Minimal API
-
-app.MapGet("/animals-minapi", (int id) =>
-{
-    if (id == 1)
-    {
-        return Results.NotFound();
-    }
-    //do smth
-    return Results.Ok("animals");
-});
-
-app.MapPost("/animals-minapi", (Animal animal) =>
-{
-    return Results.Created("", animal);
-});
+app.MapAnimalsEndpoints();
 
 app.MapControllers();
 
