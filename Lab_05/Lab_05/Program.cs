@@ -1,9 +1,14 @@
+using Lab_05.Database;
+using Lab_05.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddControllers();
+builder.Services.AddSingleton<MockDb>();
 
 var app = builder.Build();
 
@@ -38,16 +43,22 @@ app.MapGet("/weatherforecast", () =>
 
 //Minimal API
 
-app.MapGet("/animals", () =>
+app.MapGet("/animals-minapi", (int id) =>
 {
+    if (id == 1)
+    {
+        return Results.NotFound();
+    }
     //do smth
-    Results.Ok("animals");
+    return Results.Ok("animals");
 });
 
-app.MapPost("/animals", () =>
+app.MapPost("/animals-minapi", (Animal animal) =>
 {
-    Results.Ok();
+    return Results.Created("", animal);
 });
+
+app.MapControllers();
 
 app.Run();
 
