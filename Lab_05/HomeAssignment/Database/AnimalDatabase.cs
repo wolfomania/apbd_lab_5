@@ -4,11 +4,17 @@ namespace HomeAssignment.Database;
 
 public class AnimalDatabase
 {
-    public Dictionary<int, Animal> Animals { get; set; } = new();
+    public static Dictionary<int, Animal> Animals { get; set; } = new();
 
-    public Animal AddAnimal(Animal animal)
+    public static Animal AddAnimal(Animal animal)
     {
         Animals.Add(animal.Id, animal);
+        return animal;
+    }
+
+    public static Animal RemoveAnimal(Animal animal)
+    {
+        Animals.Remove(animal.Id);
         return animal;
     }
 }

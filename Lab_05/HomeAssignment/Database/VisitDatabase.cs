@@ -4,7 +4,7 @@ namespace HomeAssignment.Database;
 
 public class VisitDatabase
 {
-    public List<Visit> Visits { get; set;  } = [];
+    public static List<Visit> Visits { get; set;  } = [];
 
     
 }
