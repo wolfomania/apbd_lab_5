@@ -1,7 +1,4 @@
-﻿using System.Drawing;
-using System.Security.Principal;
-
-namespace Lab_05.Models;
+﻿namespace HomeAssignment.Models;
 
 public class Animal
 {
@@ -9,6 +6,6 @@ public class Animal
     public string Name { get; set; }
     public AnimalCategory Category { get; set; }
     public double weight { get; set; }
-    public Color color { get; set; }
+    public string color { get; set; }
     
 }
